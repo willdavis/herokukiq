@@ -8,16 +8,9 @@ require 'sinatra'
 require 'sidekiq'
 require 'redis'
 require 'sidekiq/api'
+Dir[File.dirname(__FILE__) + '/workers/*.rb'].each {|file| require file }
 
 $redis = Redis.new
-
-class SinatraWorker
-  include Sidekiq::Worker
-
-  def perform(msg="lulz you forgot a msg!")
-    $redis.lpush("sinkiq-example-messages", msg)
-  end
-end
 
 get '/' do
   stats = Sidekiq::Stats.new
