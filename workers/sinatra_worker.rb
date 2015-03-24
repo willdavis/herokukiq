@@ -1,3 +1,5 @@
+$redis = Redis.new
+
 class SinatraWorker
   include Sidekiq::Worker
 
