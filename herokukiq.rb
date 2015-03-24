@@ -10,13 +10,6 @@ require 'redis'
 require 'sidekiq/api'
 
 $redis = Redis.new
-Sidekiq.configure_client do |config|
-  config.redis = { :size => 1 }
-end
-
-Sidekiq.configure_server do |config|
-  config.redis = { :size => 2 }
-end
 
 class SinatraWorker
   include Sidekiq::Worker
